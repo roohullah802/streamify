@@ -64,11 +64,10 @@ export async function login(req, res) {
         return res.status(400).json({ message: "user not found" })
     }
 
-    const matchedPassword = await bcrypt.compare(password, user.password)
+    const isPass = await user.checkPassword(password)
+    if (!isPass)  return res.status(400).json({success: false, message:"invalid user credientials"})
 
-    if (!matchedPassword) {
-        return res.status(400).json({ message: "email and password is incorrect" })
-    }
+
     const token = jwt.sign({
         _id: user._id,
         password: user.password,
@@ -87,9 +86,6 @@ export async function login(req, res) {
 
 
 export async function logout(req, res) {
-    try {
-       return res.clearCookie("token").status(200).json({message:"user logout successfully"})
-    } catch (error) {
-        return res.status(400).json({message:"something error while logout user"})
-    }
+    res.clearCookie("token")
+    res.status(200).json({success: true, message:"user logout successfully"})
 } 

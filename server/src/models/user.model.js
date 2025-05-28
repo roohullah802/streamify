@@ -51,6 +51,11 @@ userSchema.pre("save",async function (next){
     next()
 })
 
+userSchema.methods.checkPassword = async function (pass){
+    const isPasswordCorrect = await bcrypt.compare(pass, this.password)
+    return isPasswordCorrect
+}
+
 const User = model("User", userSchema)
 
 export {User}
