@@ -7,7 +7,7 @@ import LoginPage from './pages/LoginPage.jsx';
 import OnBoardPage from './pages/OnBoardPage.jsx';
 import NotificationsPage from './pages/NotificationPage.jsx';
 import CallPage from './pages/CallPage.jsx';
-import { PrivateRouter } from './components/PrivateRoute.js';
+import { PrivateRouter } from './components/PrivateRoute.jsx';
 
 
 
